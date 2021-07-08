@@ -1,0 +1,77 @@
+{% load static i18n %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    {% load staticfiles %}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title> 证书管理系统 </title>
+    {% include '_head_css_js.html' %}
+    {% block custom_head_css_js %}
+    {% endblock %}
+</head>
+<body class="hold-transition skin-blue layout-top-nav">
+
+<div>
+
+    <header class="main-header">
+        <nav class="navbar navbar-static-top">
+            <div class="container" style="margin-left: 3%;margin-right: 3%;width:auto">
+                <div class="navbar-header">
+                    <a href="{% url 'index' %}" class="navbar-brand"><b>证书管理系统</b></a>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target="#navbar-collapse">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="{% url 'index' %}">主页 </a></li>
+                        <li class="{% block nav_status %}{% endblock %}"><a href="{% url 'certs:cert-index' %}">证书管理</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span>{{ request.user.first_name }}
+                                    {{ request.user.last_name }}</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right" style="width: 180px;">
+                                <li class="user-body">
+                                    <div class="row" style="text-align: center;width: auto;">
+                                        <div class="pull-right" style="text-align: center;width:100%;">
+                                            <a href="/admin" class="btn btn-primary btn-flat"
+                                               target="_blank">管理页面</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="{% url 'admin:password_change' %}"
+                                           class="btn btn-default btn-flat">修改密码</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="{% url 'users:logout' %}"
+                                           class="btn btn-default btn-flat">{% trans '注销' %}</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    {% block content %}
+    {% endblock %}
+</div>
+
+</body>
+{% include '_foot_js.html' %}
+{% block custom_foot_js %}
+{% endblock %}
+</html>
